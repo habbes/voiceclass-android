@@ -3,6 +3,7 @@ package xyz.habbes.voiceclass;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +20,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends AppCompatActivity
+    implements FeedbackDialog.FeedbackDialogListener {
 
     String id;
     String classId;
@@ -101,6 +103,7 @@ public class ResultActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         hideProgressDialog();
+                        hideButtons();
                         txResult.setText(className(clsId));
                         txFeedbackText.setText(R.string.feedback_thank_you);
                         txFeedbackTitle.setText(R.string.feedback_machine_learns);
@@ -151,7 +154,39 @@ public class ResultActivity extends AppCompatActivity {
         layoutBtns.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * get class id from index
+     * @param index
+     * @return
+     */
+    private String classId(int index){
+        switch(index){
+            case 0:
+                return FEMALE_CHILD;
+            case 1:
+                return FEMALE_TEEN;
+            case 2:
+                return FEMALE_ADULT;
+            case 3:
+                return FEMALE_SENIOR;
+            case 4:
+                return MALE_CHILD;
+            case 5:
+                return MALE_TEEN;
+            case 6:
+                return MALE_ADULT;
+            case 7:
+                return MALE_SENIOR;
+            default:
+                return "Unknown";
+        }
+    }
 
+    /**
+     * get class name string resource from class id
+     * @param clsId
+     * @return
+     */
     private int className(String clsId){
         switch(clsId){
             case MALE_ADULT:
@@ -172,5 +207,17 @@ public class ResultActivity extends AppCompatActivity {
                 return R.string.class_female_teen;
         }
         return R.string.class_unknown;
+    }
+
+    @Override
+    public void onFeedbackDialogPositiveClick(DialogFragment dialog, int selected) {
+        if(selected > -1 ){
+            sendFeedback(classId(selected));
+        }
+    }
+
+    @Override
+    public void onFeedbackDialogNegativeClick(DialogFragment dialog, int selected) {
+
     }
 }
