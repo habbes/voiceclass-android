@@ -31,6 +31,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="xyz.habbes.voiceclass.MainActivity" />
         </activity>
+        <activity android:name=".ResultActivity"></activity>
     </application>
 
 </manifest>
