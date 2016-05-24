@@ -18,9 +18,10 @@
         android:textSize="35sp"
         android:text="Result"
         android:visibility="visible"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="147dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
