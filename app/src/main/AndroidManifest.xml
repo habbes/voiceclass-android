@@ -22,15 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SubmitAudioActivity"
-            android:label="@string/title_activity_submit_audio"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="xyz.habbes.voiceclass.MainActivity" />
-        </activity>
         <activity android:name=".ResultActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

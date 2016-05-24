@@ -168,11 +168,6 @@ public class MainActivity extends AppCompatActivity
         txRecording.setVisibility(View.GONE);
     }
 
-    private void startSubmitActivity(){
-        Intent intent = new Intent(getApplicationContext(), SubmitAudioActivity.class);
-        startActivity(intent);
-    }
-
     private void showSendDialog(){
         DialogFragment dialog = new SendAudioDialog();
         dialog.show(getSupportFragmentManager(), "SendAudioDialog");
