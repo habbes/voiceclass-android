@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSendAudioDialogPositiveClick(DialogFragment dialog) {
-        
+
     }
 
     @Override
