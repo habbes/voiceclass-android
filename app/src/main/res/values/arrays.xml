@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="voice_classes">
+        <item>@string/class_female_child</item>
+        <item>@string/class_female_teen</item>
+        <item>@string/class_female_adult</item>
+        <item>@string/class_female_senior</item>
+        <item>@string/class_male_child</item>
+        <item>@string/class_male_teen</item>
+        <item>@string/class_male_adult</item>
+        <item>@string/class_male_senior</item>
+    </array>
+</resources>

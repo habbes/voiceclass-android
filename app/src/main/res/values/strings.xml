@@ -18,8 +18,11 @@
     <string name="feedback_question">Is this correct?</string>
     <string name="feedback_thank_you">Thank You</string>
     <string name="feedback_machine_learns">The machine learns and improves thanks to your feedback</string>
+    <string name="feedback_correct_prompt">What was the correct voice?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="feedback_send">Send Feedback</string>
+    <string name="cancel">Cancel</string>
     <string name="class_male_adult">Male Adult</string>
     <string name="class_male_child">Male Child</string>
     <string name="class_male_teen">Male Teen</string>

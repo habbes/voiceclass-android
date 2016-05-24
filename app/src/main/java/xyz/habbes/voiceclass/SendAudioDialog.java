@@ -22,7 +22,13 @@ public class SendAudioDialog extends DialogFragment {
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
-        dialogListener = (SendAudioDialogListener) activity;
+        try {
+            dialogListener = (SendAudioDialogListener) activity;
+        }
+        catch(ClassCastException e){
+            throw new ClassCastException(activity.toString()
+                + " must implement SendAudioDialogListener");
+        }
     }
 
     @Override
