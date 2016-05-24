@@ -5,20 +5,26 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Environment;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by Habbes on 24/05/2016.
  */
 public class Recorder {
 
-    public final static int SAMPLERATE = 44100;
+    public final static int SAMPLE_RATE = 44100;
     public final static int CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     public final static int ENCODING = AudioFormat.ENCODING_PCM_16BIT;
+    public final static int SAMPLE_WIDTH = 2; // 2 bytes = 16bit
     public final static int BUFFER_SIZE =
-            AudioRecord.getMinBufferSize(SAMPLERATE, CHANNELS, ENCODING);
+            AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNELS, ENCODING);
     public final static String FILE_PATH =
             Environment.getExternalStorageDirectory().getPath() + "/VoiceClassRecording.pcm";
     private static AudioRecord recorder;
@@ -33,7 +39,7 @@ public class Recorder {
         }
         recorder = new AudioRecord(
                 MediaRecorder.AudioSource.MIC,
-                SAMPLERATE,
+                SAMPLE_RATE,
                 CHANNELS,
                 ENCODING,
                 BUFFER_SIZE
@@ -58,6 +64,24 @@ public class Recorder {
             recorder = null;
             recordingThread = null;
         }
+    }
+
+    public static File getRecordedFile(){
+        return new File(FILE_PATH);
+    }
+
+    public static byte[] readRecordedData() throws IOException {
+        int read;
+        int bufSize = 1024;
+        byte[] buffer = new byte[bufSize];
+        InputStream is = new BufferedInputStream(new FileInputStream(FILE_PATH));
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+
+        while( (read = is.read(buffer, 0, bufSize)) != -1 ){
+            os.write(buffer, 0, read);
+        }
+
+        return os.toByteArray();
     }
 
     public static boolean isRecording(){
