@@ -21,9 +21,10 @@
     <string name="class_male_adult">Male Adult</string>
     <string name="class_male_child">Male Child</string>
     <string name="class_male_teen">Male Teen</string>
-    <string name="class_male_Senior">Male Senior</string>
+    <string name="class_male_senior">Male Senior</string>
     <string name="class_female_adult">Female Adult</string>
     <string name="class_female_child">Female Child</string>
     <string name="class_female_teen">Female Teen</string>
-    <string name="class_female_Senior">Female Senior</string>
+    <string name="class_female_senior">Female Senior</string>
+    <string name="class_unknown">Unknown Result</string>
 </resources>

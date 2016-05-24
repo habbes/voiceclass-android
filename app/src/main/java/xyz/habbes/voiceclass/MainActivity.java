@@ -120,10 +120,10 @@ public class MainActivity extends AppCompatActivity
             public void onResponse(JSONObject response) {
                 hideProgressDialog();
                 try {
-                    String id = response.getString("id");
-                    String className = response.getString("class");
-                    double probability = response.getDouble("probability");
-                    txRecordToStart.setText(String.format("id:%s, class:%s, prob:%f", id, className, probability));
+                    Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                    intent.putExtra("id", response.getString("id"));
+                    intent.putExtra("class", response.getString("class"));
+                    startActivity(intent);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     errorToast(R.string.error_response);
