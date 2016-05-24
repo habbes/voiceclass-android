@@ -1,5 +1,6 @@
 package xyz.habbes.voiceclass;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,11 +8,24 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity
     implements SendAudioDialog.SendAudioDialogListener {
@@ -20,6 +34,14 @@ public class MainActivity extends AppCompatActivity
     TextView txRecording;
     TextView txRecordToStart;
     boolean hasRecording = false;
+
+    RequestQueue requestQueue;
+    ProgressDialog progressDialog;
+
+    final String BASE_URL = "http://habbes.xyz:9050/api";
+    final String TRAIN_URL = BASE_URL + "/train";
+    final String CLASSIFY_URL = BASE_URL + "/classify";
+    final String FEEDBACK_URL = BASE_URL + "/feedback";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +62,17 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    private void addRequest(Request r){
+        getRequestQueue().add(r);
+    }
+
+    private RequestQueue getRequestQueue(){
+        if(requestQueue == null){
+            requestQueue = Volley.newRequestQueue(this);
+        }
+        return requestQueue;
+    }
+
     private void startRecording(){
         setStopRecordingIcon();
         hideRecordToStartText();
@@ -57,6 +90,66 @@ public class MainActivity extends AppCompatActivity
         hasRecording = true;
         showSendDialog();
         showRecordToStartText();
+    }
+
+    public void sendAudio(){
+        String url = "";
+        JSONObject body = new JSONObject();
+        try {
+            body.put("type", "pcm");
+            body.put("sampleRate", Recorder.SAMPLE_RATE);
+            body.put("sampleWidth", Recorder.SAMPLE_WIDTH);
+            body.put("channelCount", Recorder.CHANNELS);
+            try {
+                body.put("data", Base64.encodeToString(
+                        Recorder.readRecordedData(), Base64.DEFAULT
+                ));
+            } catch (IOException e) {
+                e.printStackTrace();
+                errorToast(getResources().getString(R.string.error_reading_recording));
+                return;
+            }
+        } catch(JSONException e){
+            e.printStackTrace();
+        }
+
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST, CLASSIFY_URL, body, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                hideProgressDialog();
+                try {
+                    String id = response.getString("id");
+                    String className = response.getString("class");
+                    double probability = response.getDouble("probability");
+                    txRecordToStart.setText(String.format("id:%s, class:%s, prob:%f", id, className, probability));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    errorToast(R.string.error_response);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                hideProgressDialog();
+                errorToast(R.string.error_try_again);
+            }
+        }
+        );
+
+        addRequest(request);
+        showProgressDialog("Analyzing Audio", "Your recording has been sent for analysis. Please wait...");
+    }
+
+    private void errorToast(int res){
+        errorToast(getResources().getString(res));
+    }
+
+    private void errorToast(String msg){
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
     private void hideRecordToStartText(){
@@ -83,6 +176,20 @@ public class MainActivity extends AppCompatActivity
     private void showSendDialog(){
         DialogFragment dialog = new SendAudioDialog();
         dialog.show(getSupportFragmentManager(), "SendAudioDialog");
+    }
+
+    private void showProgressDialog(String title, String message){
+        hideProgressDialog();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(message);
+        progressDialog.setTitle(title);
+        progressDialog.show();
+    }
+
+    private void hideProgressDialog(){
+        if(progressDialog != null){
+            progressDialog.dismiss();
+        }
     }
 
     private void handleFabClick(){
@@ -134,7 +241,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSendAudioDialogPositiveClick(DialogFragment dialog) {
-
+        sendAudio();
     }
 
     @Override
