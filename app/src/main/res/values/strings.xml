@@ -9,4 +9,21 @@
     <string name="btn_send_audio">Send</string>
     <string name="btn_discard">Discard</string>
     <string name="submit_dialog_message">Send the audio for analysis?</string>
+    <string name="error_reading_recording">Error retrieving recording</string>
+    <string name="error_sd_not_available">Error: Cannot find SD card</string>
+    <string name="error_network">A network error occured.</string>
+    <string name="error_response">Error: unexpected response from data</string>
+    <string name="error_try_again">An error occured. Please try again.</string>
+    <string name="feedback_title">Your feedback</string>
+    <string name="feedback_question">Is this correct?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="class_male_adult">Male Adult</string>
+    <string name="class_male_child">Male Child</string>
+    <string name="class_male_teen">Male Teen</string>
+    <string name="class_male_Senior">Male Senior</string>
+    <string name="class_female_adult">Female Adult</string>
+    <string name="class_female_child">Female Child</string>
+    <string name="class_female_teen">Female Teen</string>
+    <string name="class_female_Senior">Female Senior</string>
 </resources>
