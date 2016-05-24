@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,7 +13,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+    implements SendAudioDialog.SendAudioDialogListener {
 
     FloatingActionButton fab;
     TextView txRecording;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setStartRecordingIcon();
         Toast.makeText(this, R.string.recording_stopped, Toast.LENGTH_SHORT).show();
         hasRecording = true;
-        startSubmitActivity();
+        showSendDialog();
         showRecordToStartText();
     }
 
@@ -76,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
     private void startSubmitActivity(){
         Intent intent = new Intent(getApplicationContext(), SubmitAudioActivity.class);
         startActivity(intent);
+    }
+
+    private void showSendDialog(){
+        DialogFragment dialog = new SendAudioDialog();
+        dialog.show(getSupportFragmentManager(), "SendAudioDialog");
     }
 
     private void handleFabClick(){
@@ -122,5 +129,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onSendAudioDialogPositiveClick(DialogFragment dialog) {
+        
+    }
+
+    @Override
+    public void onSendAudioDialogNegativeClick(DialogFragment dialog) {
+
     }
 }
