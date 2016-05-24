@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
 
-    final String BASE_URL = "http://habbes.xyz:9050/api";
-    final String TRAIN_URL = BASE_URL + "/train";
-    final String CLASSIFY_URL = BASE_URL + "/classify";
-    final String FEEDBACK_URL = BASE_URL + "/feedback";
+    public static final String BASE_URL = "http://habbes.xyz:9050/api";
+    public static final String TRAIN_URL = BASE_URL + "/train";
+    public static final String CLASSIFY_URL = BASE_URL + "/classify";
+    public static final String FEEDBACK_URL = BASE_URL + "/feedback";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

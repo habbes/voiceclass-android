@@ -6,7 +6,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -14,9 +25,14 @@ public class ResultActivity extends AppCompatActivity {
     String classId;
 
     TextView txResult;
+    TextView txFeedbackTitle;
+    TextView txFeedbackText;
     Button btnYes;
     Button btnNo;
+    LinearLayout layoutBtns;
     ProgressDialog progressDialog;
+
+    RequestQueue requestQueue;
 
     public final static String MALE_ADULT = "MaleAdult";
     public final static String MALE_CHILD = "MaleChild";
@@ -37,8 +53,11 @@ public class ResultActivity extends AppCompatActivity {
         classId = intent.getStringExtra("class");
 
         txResult = (TextView) findViewById(R.id.txResult);
+        txFeedbackText = (TextView) findViewById(R.id.txFeedbackText);
+        txFeedbackTitle = (TextView) findViewById(R.id.txFeedbackTitle);
         btnYes = (Button) findViewById(R.id.btnResultCorrect);
         btnNo = (Button) findViewById(R.id.btnResultIncorrect);
+        layoutBtns = (LinearLayout) findViewById(R.id.layoutResultBtnGroup);
 
         txResult.setText(className(classId));
 
@@ -58,11 +77,45 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void handleBtnYesClick(){
-
+        sendFeedback(classId);
     }
 
     private void handleBtnNoClick(){
 
+    }
+
+    private void sendFeedback(final String clsId){
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("id", id);
+            body.put("class", clsId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST, MainActivity.FEEDBACK_URL, body,
+                new Response.Listener<JSONObject>(){
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        hideProgressDialog();
+                        txResult.setText(className(clsId));
+                        txFeedbackText.setText(R.string.feedback_thank_you);
+                        txFeedbackTitle.setText(R.string.feedback_machine_learns);
+                    }
+                },
+                new Response.ErrorListener(){
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        hideProgressDialog();
+                    }
+                }
+        );
+        addRequest(request);
+        showProgressDialog("Sending Feedback", "Sending your feedback. Please wait...");
     }
 
     private void showProgressDialog(String title, String message){
@@ -77,6 +130,25 @@ public class ResultActivity extends AppCompatActivity {
         if(progressDialog != null){
             progressDialog.dismiss();
         }
+    }
+
+    private void addRequest(Request r){
+        getRequestQueue().add(r);
+    }
+
+    private RequestQueue getRequestQueue(){
+        if(requestQueue == null){
+            requestQueue = Volley.newRequestQueue(this);
+        }
+        return requestQueue;
+    }
+
+    private void hideButtons(){
+        layoutBtns.setVisibility(View.GONE);
+    }
+
+    private void showButtons(){
+        layoutBtns.setVisibility(View.VISIBLE);
     }
 
 

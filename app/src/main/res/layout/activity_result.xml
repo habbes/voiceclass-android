@@ -33,12 +33,14 @@
         <include layout="@layout/horizontal_rule" />
 
         <TextView
+            android:id="@+id/txFeedbackTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/feedback_title"
             android:textSize="20sp"/>
         <TextView
+            android:id="@+id/txFeedbackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -46,6 +48,7 @@
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"/>
         <LinearLayout
+            android:id="@+id/layoutResultBtnGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

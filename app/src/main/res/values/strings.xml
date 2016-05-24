@@ -16,6 +16,8 @@
     <string name="error_try_again">An error occured. Please try again.</string>
     <string name="feedback_title">Your feedback</string>
     <string name="feedback_question">Is this correct?</string>
+    <string name="feedback_thank_you">Thank You</string>
+    <string name="feedback_machine_learns">The machine learns and improves thanks to your feedback</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="class_male_adult">Male Adult</string>
