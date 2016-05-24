@@ -1,5 +1,6 @@
 package xyz.habbes.voiceclass;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -52,10 +53,16 @@ public class MainActivity extends AppCompatActivity {
         setStartRecordingIcon();
         Toast.makeText(this, R.string.recording_stopped, Toast.LENGTH_SHORT).show();
         hasRecording = true;
+        startSubmitActivity();
+        showRecordToStartText();
     }
 
     private void hideRecordToStartText(){
         txRecordToStart.setVisibility(View.GONE);
+    }
+
+    private void showRecordToStartText(){
+        txRecordToStart.setVisibility(View.VISIBLE);
     }
 
     private void showRecordingText(){
@@ -64,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void hideRecordingText(){
         txRecording.setVisibility(View.GONE);
+    }
+
+    private void startSubmitActivity(){
+        Intent intent = new Intent(getApplicationContext(), SubmitAudioActivity.class);
+        startActivity(intent);
     }
 
     private void handleFabClick(){

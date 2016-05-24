@@ -5,4 +5,7 @@
     <string name="recording">Recording...</string>
     <string name="recording_started">Recording has started.</string>
     <string name="recording_stopped">Recording has stopped.</string>
+    <string name="title_activity_submit_audio">Submit Recording</string>
+    <string name="btn_send_audio">Submit Recording</string>
+    <string name="btn_discard">Discard Recording</string>
 </resources>
