@@ -31,7 +31,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="xyz.habbes.voiceclass.MainActivity" />
         </activity>
-        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".ResultActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:valuue="xyz.habbes.voiceclass.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
