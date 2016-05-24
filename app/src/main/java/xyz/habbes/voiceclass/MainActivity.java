@@ -8,11 +8,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
+    TextView txRecording;
+    TextView txRecordToStart;
+    boolean hasRecording = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        txRecording = (TextView) findViewById(R.id.txRecording);
+        txRecordToStart = (TextView) findViewById(R.id.txRecordToStart);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,14 +39,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void startRecording(){
         setStopRecordingIcon();
+        hideRecordToStartText();
+        showRecordingText();
         Recorder.startRecording();
-        Toast.makeText(this, R.string.recording_started, Toast.LENGTH_SHORT);
+        Toast.makeText(this, R.string.recording_started, Toast.LENGTH_SHORT).show();
+        hasRecording = false;
     }
 
-    private void stopRecording(){
+    private void stopRecording() {
         Recorder.stopRecording();
+        hideRecordingText();
         setStartRecordingIcon();
-        Toast.makeText(this, R.string.recording_started, Toast.LENGTH_SHORT);
+        Toast.makeText(this, R.string.recording_stopped, Toast.LENGTH_SHORT).show();
+        hasRecording = true;
+    }
+
+    private void hideRecordToStartText(){
+        txRecordToStart.setVisibility(View.GONE);
+    }
+
+    private void showRecordingText(){
+        txRecording.setVisibility(View.VISIBLE);
+    }
+
+    private void hideRecordingText(){
+        txRecording.setVisibility(View.GONE);
     }
 
     private void handleFabClick(){

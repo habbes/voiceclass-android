@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Voice Class</string>
     <string name="action_settings">Settings</string>
-    <string name="recording_started">Recording has ended.</string>
+    <string name="record_to_start">Press the record button to start...</string>
+    <string name="recording">Recording...</string>
+    <string name="recording_started">Recording has started.</string>
     <string name="recording_stopped">Recording has stopped.</string>
 </resources>
