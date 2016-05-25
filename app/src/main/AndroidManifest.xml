@@ -25,7 +25,7 @@
         <activity android:name=".ResultActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:valuue="xyz.habbes.voiceclass.MainActivity" />
+                android:value="xyz.habbes.voiceclass.MainActivity" />
         </activity>
     </application>
 

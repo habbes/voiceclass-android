@@ -93,15 +93,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void sendAudio(){
-        String url = "";
         JSONObject body = new JSONObject();
+        JSONObject audio = new JSONObject();
+
         try {
-            body.put("type", "pcm");
-            body.put("sampleRate", Recorder.SAMPLE_RATE);
-            body.put("sampleWidth", Recorder.SAMPLE_WIDTH);
-            body.put("channelCount", Recorder.CHANNELS);
+            audio.put("type", "pcm");
+            audio.put("sampleRate", Recorder.SAMPLE_RATE);
+            audio.put("sampleWidth", Recorder.SAMPLE_WIDTH);
+            audio.put("channelCount", Recorder.CHANNEL_COUNT);
             try {
-                body.put("data", Base64.encodeToString(
+                audio.put("data", Base64.encodeToString(
                         Recorder.readRecordedData(), Base64.DEFAULT
                 ));
             } catch (IOException e) {
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity
                 errorToast(getResources().getString(R.string.error_reading_recording));
                 return;
             }
+            body.put("audio", audio);
         } catch(JSONException e){
             e.printStackTrace();
         }

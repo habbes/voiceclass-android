@@ -34,7 +34,8 @@ public class SendAudioDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.submit_dialog_message)
+        builder.setTitle(R.string.submit_dialog_title)
+                .setMessage(R.string.submit_dialog_message)
                 .setPositiveButton(R.string.btn_send_audio, new DialogInterface.OnClickListener() {
 
                     @Override

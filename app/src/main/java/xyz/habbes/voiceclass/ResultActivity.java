@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -83,7 +85,7 @@ public class ResultActivity extends AppCompatActivity
     }
 
     private void handleBtnNoClick(){
-
+        showFeedbackPrompt();
     }
 
     private void sendFeedback(final String clsId){
@@ -114,11 +116,26 @@ public class ResultActivity extends AppCompatActivity
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         hideProgressDialog();
+                        Log.e("VoiceClass:RESULT", error.toString());
+                        longToast(R.string.error_try_again);
                     }
                 }
         );
         addRequest(request);
         showProgressDialog("Sending Feedback", "Sending your feedback. Please wait...");
+    }
+
+    private void longToast(int resource){
+        longToast(getResources().getString(resource));
+    }
+
+    private void longToast(String msg){
+        Toast.makeText(ResultActivity.this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    private void showFeedbackPrompt(){
+        DialogFragment dialog = new FeedbackDialog();
+        dialog.show(getSupportFragmentManager(), "FeedbackDialog");
     }
 
     private void showProgressDialog(String title, String message){

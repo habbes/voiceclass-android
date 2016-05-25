@@ -21,6 +21,7 @@ public class Recorder {
 
     public final static int SAMPLE_RATE = 44100;
     public final static int CHANNELS = AudioFormat.CHANNEL_IN_MONO;
+    public final static int CHANNEL_COUNT = 1;
     public final static int ENCODING = AudioFormat.ENCODING_PCM_16BIT;
     public final static int SAMPLE_WIDTH = 2; // 2 bytes = 16bit
     public final static int BUFFER_SIZE =
