@@ -9,12 +9,14 @@
     <string name="btn_send_audio">Send</string>
     <string name="btn_discard">Discard</string>
     <string name="submit_dialog_title">Send audio for analysis?</string>
-    <string name="submit_dialog_message">In order to be analyzed, the recorded audio needs to be sent to the server.</string>
+    <string name="submit_dialog_message">The recording needs to be sent to our remote server for analysis.</string>
     <string name="error_reading_recording">Error retrieving recording</string>
     <string name="error_sd_not_available">Error: Cannot find SD card</string>
     <string name="error_network">A network error occured.</string>
     <string name="error_response">Error: unexpected response from data</string>
     <string name="error_try_again">An error occured. Please try again.</string>
+    <string name="analyzing_audio_title">Analyzing Audio</string>
+    <string name="analyzing_audio_message">Your recording is being analyzed. Please wait...</string>
     <string name="feedback_title">Your feedback</string>
     <string name="feedback_question">Is this correct?</string>
     <string name="feedback_thank_you">Thank You</string>
@@ -23,6 +25,8 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="feedback_send">Send Feedback</string>
+    <string name="feedback_sending_title">Sending Feedback</string>
+    <string name="feedback_sending_message">Your feedback is being processed. Please wait...</string>
     <string name="cancel">Cancel</string>
     <string name="class_male_adult">Male Adult</string>
     <string name="class_male_child">Male Child</string>

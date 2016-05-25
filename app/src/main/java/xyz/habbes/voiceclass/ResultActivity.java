@@ -123,7 +123,8 @@ public class ResultActivity extends AppCompatActivity
                 }
         );
         addRequest(request);
-        showProgressDialog("Sending Feedback", "Sending your feedback. Please wait...");
+        showProgressDialog(getResources().getString(R.string.feedback_sending_title),
+                getResources().getString(R.string.feedback_sending_message));
     }
 
     private void longToast(int resource){

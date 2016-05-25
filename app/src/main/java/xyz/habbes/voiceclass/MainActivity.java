@@ -162,7 +162,8 @@ public class MainActivity extends AppCompatActivity
         );
 
         addRequest(request);
-        showProgressDialog("Analyzing Audio", "Your recording has been sent for analysis. Please wait...");
+        showProgressDialog(getResources().getString(R.string.analyzing_audio_title),
+                getResources().getString(R.string.analyzing_audio_message));
     }
 
     private void errorToast(int res){
