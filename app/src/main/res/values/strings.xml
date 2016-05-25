@@ -17,10 +17,10 @@
     <string name="error_try_again">An error occured. Please try again.</string>
     <string name="analyzing_audio_title">Analyzing Audio</string>
     <string name="analyzing_audio_message">Your recording is being analyzed. Please wait...</string>
-    <string name="feedback_title">Your feedback</string>
+    <string name="feedback_title">Your Feedback</string>
     <string name="feedback_question">Is this correct?</string>
     <string name="feedback_thank_you">Thank You</string>
-    <string name="feedback_machine_learns">The machine learns and improves thanks to your feedback</string>
+    <string name="feedback_machine_learns">The machine learns and improves thanks to your feedback.</string>
     <string name="feedback_correct_prompt">What was the correct voice?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
