@@ -108,8 +108,8 @@ public class ResultActivity extends AppCompatActivity
                         hideProgressDialog();
                         hideButtons();
                         txResult.setText(className(clsId));
-                        txFeedbackText.setText(R.string.feedback_thank_you);
-                        txFeedbackTitle.setText(R.string.feedback_machine_learns);
+                        txFeedbackTitle.setText(R.string.feedback_thank_you);
+                        txFeedbackText.setText(R.string.feedback_machine_learns);
                     }
                 },
                 new Response.ErrorListener(){
